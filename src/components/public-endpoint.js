@@ -1,21 +1,7 @@
 import React from 'react';
 
-import ReactJson from 'react-json-view';
-import JSONTree from 'react-json-tree';
-
-import { toast } from 'react-toastify';
-
 import Endpoint from './endpoint.js';
-
-async function getJson(url) {
-    const resp = await fetch(url, {
-        headers: {
-            'Accept': 'application/json'
-        }
-    });
-
-    return resp.json();
-}
+import { getJson } from '../lib/http.js';
 
 export default class PublicEndpoint extends React.Component {
 

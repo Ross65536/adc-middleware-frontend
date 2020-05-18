@@ -11,6 +11,7 @@ import keycloak from './keycloak.js';
 
 import './App.css';
 import PublicEndpoint from './components/public-endpoint.js';
+import GetEndpoint from './components/get-endpoint.js';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -66,7 +67,8 @@ export default class App extends React.Component {
           {/* BODY */}
           <div class="container mt-5">
             <PublicEndpoint url="/info"/>
-            
+            <GetEndpoint url="/repertoire" token={this.state.token}/>
+
 
           </div>
           <div class="mt-5">

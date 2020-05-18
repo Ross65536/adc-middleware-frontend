@@ -17,6 +17,8 @@ Start keycloak and then create a new client in the `Clients` tab: load (import) 
 
 > If you run the middleware server anywhere other than `localhost:8080` you need to update `package.json`'s `proxy` value
 
+3. Disable CORS in browser
+
 ### Development
 
 - Run locally:

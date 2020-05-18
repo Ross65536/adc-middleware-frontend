@@ -20,17 +20,25 @@ export default class Endpoint extends React.Component {
         }
     }
 
+    
+
     render() {
         return (
             <div class="mb-3">
-                <div class="bg-secondary text-white d-flex justify-content-between px-3 py-2"> 
-                    <span style={{fontSize:30}}>
-                        {this.props.method} <b>{this.props.url}</b>
-                    </span>
-                    <button class="btn btn-primary" onClick={this.props.request}>Request</button>
-                </div>
-                <div class="d-block">
-                    {this.response()}
+                <div class="bg-secondary text-white px-3 py-2"> 
+                    <div class=" d-flex justify-content-between">
+                        <span style={{fontSize:30}}>
+                            {this.props.method} <b>{this.props.url}</b>
+                        </span>
+                        <button class="btn btn-primary" onClick={this.props.request}>Request</button>
+                    </div>
+
+                    <div class="mt-2">
+                        {this.props.children}
+                    </div>
+                    <div>
+                        {this.response()}
+                    </div>
                 </div>
             </div>
         );
