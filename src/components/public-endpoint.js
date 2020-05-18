@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Endpoint from './endpoint.js';
-import { getJson } from '../lib/http.js';
+import { getJson, catchHttpErrors } from '../lib/http.js';
 
 export default class PublicEndpoint extends React.Component {
 
@@ -16,8 +16,10 @@ export default class PublicEndpoint extends React.Component {
 
     async makeRequest() {
         const url = `${process.env.REACT_APP_ADC_BASE_PATH}${this.props.url}`;
-        const json = await getJson(url);
-        this.setState(state => ({ response: json }));
+        catchHttpErrors(async () => {
+            const json = await getJson(url);
+            this.setState(state => ({ response: json }));
+        });
     }
 
     render() {
