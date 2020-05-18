@@ -1,14 +1,14 @@
 import React from 'react';
 
 import Endpoint from './endpoint.js';
-import { getJson } from '../lib/http.js';
+import { getProtectedJson, catchHttpErrors } from '../lib/http.js';
 
 export default class GetEndpoint extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            id: "",
+            id: "5e53de7f9463684866be6092",
             response: "",
         };
 
@@ -18,8 +18,10 @@ export default class GetEndpoint extends React.Component {
 
     async makeRequest() {
         const url = `${process.env.REACT_APP_ADC_BASE_PATH}${this.props.url}/${this.state.id}`;
-        const json = await getJson(url);
-        this.setState({ ...this.state, response: json });
+        catchHttpErrors(async () => {
+            const json = await getProtectedJson(url, this.props.token);
+            this.setState({ ...this.state, response: json });
+        });
     }
 
     handleChange(event) {    
