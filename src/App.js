@@ -4,17 +4,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React from 'react';
 
-import './App.css';
-
-import PublicEndpoint from './components/public-endpoint.js';
-
-import { KeycloakProvider } from '@react-keycloak/web';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useKeycloak, KeycloakProvider } from '@react-keycloak/web';
 import keycloak from './keycloak.js';
+
+import './App.css';
+import PublicEndpoint from './components/public-endpoint.js';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.saveTokens = this.saveTokens.bind(this);
   }
 
@@ -23,8 +23,14 @@ export default class App extends React.Component {
   }
 
   render() {
+    // const { keycloak, initialized } = useKeycloak();
+    
     return (
-      <KeycloakProvider onTokens={this.saveTokens} keycloak={keycloak}>
+      <KeycloakProvider 
+        onTokens={this.saveTokens} keycloak={keycloak}
+        onAuthSuccess={()=>toast("Logged in")}
+        onAuthError={()=>toast("Login error")}
+      >
         <div className="App">
           {/* HEADER */}
           <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -44,6 +50,8 @@ export default class App extends React.Component {
                 </li>
               </ul>
             </div>
+
+
             <button class="btn btn-primary" onClick={() => keycloak.login()}>Login</button>
           </nav>
     
@@ -51,7 +59,21 @@ export default class App extends React.Component {
           <div class="container mt-5">
             <PublicEndpoint url="/info"/>
           </div>
+
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            />
         </div>
+
+        
       </KeycloakProvider>
     );
   }

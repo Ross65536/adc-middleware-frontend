@@ -3,6 +3,8 @@ import React from 'react';
 import ReactJson from 'react-json-view';
 import JSONTree from 'react-json-tree';
 
+import { toast } from 'react-toastify';
+
 async function getJson(url) {
     const resp = await fetch(url, {
         headers: {
@@ -28,6 +30,7 @@ export default class PublicEndpoint extends React.Component {
     async makeRequest() {
         const url = `${process.env.REACT_APP_ADC_BASE_PATH}${this.props.url}`;
         const json = await getJson(url);
+        toast("OK");
         this.setState(state => ({ response: json }));
     }
 
