@@ -85,9 +85,7 @@ export async function getProtectedJson(url, userToken) {
     };
 
     const discovery = await getJson(process.env.REACT_APP_UMA_DISCOVERY_DOCUMENT_PATH);
-
     const rpt = await postForm(discovery.token_endpoint, tokenBody, userToken);
-
     const resourceHeaders = {
         "Authorization": `Bearer ${rpt.access_token}`
     }
