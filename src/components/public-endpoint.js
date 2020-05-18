@@ -4,13 +4,13 @@ import ReactJson from 'react-json-view';
 import JSONTree from 'react-json-tree';
 
 async function getJson(url) {
-    const respo = await fetch(url, {
+    const resp = await fetch(url, {
         headers: {
             'Accept': 'application/json'
         }
     });
 
-    return respo.json();
+    return resp.json();
 }
 
 export default class PublicEndpoint extends React.Component {
@@ -46,7 +46,7 @@ export default class PublicEndpoint extends React.Component {
         return (
             <div class="">
                 <div class="bg-secondary text-white d-flex justify-content-between px-3 py-2"> 
-                    <span style={{"font-size":30}}>
+                    <span style={{fontSize:30}}>
                         GET <b>{this.props.url}</b>
                     </span>
                     <button class="btn btn-primary" onClick={this.makeRequest}>Request</button>
