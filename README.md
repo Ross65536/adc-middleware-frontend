@@ -18,4 +18,4 @@ yarn i
 
   yarn build
 
-If you run the middleware server anywhere other than `localhost:8080` you need to update `package.json`'s `proxy` value
+> If you run the middleware server anywhere other than `localhost:8080` you need to update `package.json`'s `proxy` value

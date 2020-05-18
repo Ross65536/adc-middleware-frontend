@@ -1,5 +1,7 @@
-
 import React from 'react';
+
+import ReactJson from 'react-json-view';
+import JSONTree from 'react-json-tree';
 
 async function getJson(url) {
     const respo = await fetch(url, {
@@ -8,7 +10,7 @@ async function getJson(url) {
         }
     });
 
-    return respo.text();
+    return respo.json();
 }
 
 export default class PublicEndpoint extends React.Component {
@@ -20,12 +22,24 @@ export default class PublicEndpoint extends React.Component {
         };
 
         this.makeRequest = this.makeRequest.bind(this);
+        this.response = this.response.bind(this);
     }
 
     async makeRequest() {
         const url = `${process.env.REACT_APP_ADC_BASE_PATH}${this.props.url}`;
         const json = await getJson(url);
         this.setState(state => ({ response: json }));
+    }
+
+    response() {
+        if (this.state.response != "") {
+            return (
+                <span class="text-left">
+                    {/* <ReactJson enableClipboard={false} displayDataTypes={false} theme="monokai" src={this.state.response} /> */}
+                    <JSONTree data={this.state.response} />
+                </span>
+            );
+        }
     }
 
     render() {
@@ -37,9 +51,9 @@ export default class PublicEndpoint extends React.Component {
                     </span>
                     <button class="btn btn-primary" onClick={this.makeRequest}>Request</button>
                 </div>
-                <div class="bg-light">
+                <div class="bg-light d-block">
                     <b>Response:</b> <br/>
-                    <span>{this.state.response}</span>
+                    {this.response()}
                 </div>
             </div>
         );
