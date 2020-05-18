@@ -23,7 +23,7 @@ function App() {
             </li>
             <li class="nav-item">
               <span class="nav-link">
-                ADC Base: {process.env.REACT_APP_ADC_BASE}
+                ADC Base: {process.env.REACT_APP_ADC_BASE_PATH}
               </span>
             </li>
           </ul>
