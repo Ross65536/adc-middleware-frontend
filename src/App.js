@@ -15,10 +15,18 @@ import PublicEndpoint from './components/public-endpoint.js';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      token: ""
+    }
+
     this.saveTokens = this.saveTokens.bind(this);
   }
 
   saveTokens(tokens) {
+    if (tokens.token !== undefined) {
+      this.setState(state => ({ token: tokens.token }));
+    }
     console.log(tokens);
   }
 
@@ -58,6 +66,11 @@ export default class App extends React.Component {
           {/* BODY */}
           <div class="container mt-5">
             <PublicEndpoint url="/info"/>
+            
+
+          </div>
+          <div class="mt-5">
+            Token: {this.state.token}
           </div>
 
           <ToastContainer
