@@ -40,7 +40,7 @@ export default class Endpoint extends React.Component {
                         <button class="btn btn-primary" onClick={this.props.request} disabled={this.props.requestDisabled}>Request</button>
                     </div>
 
-                    <div class="mt-2">
+                    <div class="mt-2 d-flex">
                         {this.props.children}
                     </div>
                     <div>
