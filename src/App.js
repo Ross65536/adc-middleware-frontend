@@ -10,16 +10,23 @@ import { useKeycloak, KeycloakProvider } from '@react-keycloak/web';
 import keycloak from './keycloak.js';
 
 import './App.css';
+
+import { getJson, catchHttpErrors } from './lib/http.js';
 import PublicEndpoint from './components/public-endpoint.js';
 import GetEndpoint from './components/get-endpoint.js';
+import PostEndpoint from './components/post-endpoint.js';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      token: ""
+      token: "",
+      publicFields: {}
     }
+
+    catchHttpErrors(() => getJson("/airr/v1/public_fields"))
+      .then(json => this.setState({... this.state, publicFields: json}));
 
     this.saveTokens = this.saveTokens.bind(this);
     this.isLoggedIn = this.isLoggedIn.bind(this);
@@ -28,7 +35,7 @@ export default class App extends React.Component {
 
   saveTokens(tokens) {
     if (tokens.token !== undefined) {
-      this.setState(state => ({ token: tokens.token }));
+      this.setState({ ...this.state, token: tokens.token });
     }
   }
 
@@ -86,8 +93,11 @@ export default class App extends React.Component {
           {/* BODY */}
           <div class="container mt-5">
             <PublicEndpoint url="/info"/>
+
             <GetEndpoint url="/repertoire" token={this.state.token} responseField="Repertoire"/>
             <GetEndpoint url="/rearrangement" token={this.state.token} responseField="Rearrangement"/>
+
+            <PostEndpoint url="/repertoire" token={this.state.token} responseField="Repertoire"/>
           </div>
 
           <ToastContainer

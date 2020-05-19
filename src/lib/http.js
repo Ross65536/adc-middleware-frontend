@@ -61,10 +61,10 @@ async function postForm(url, body, bearer) {
 const WWW_AUTH_HEADER = "www-authenticate";
 const TICKET_CAPTURE = /.*ticket=\"(.*)\".*/;
 
-export async function getProtectedJson(url, userToken) {
+async function protectedRequest(url, userToken, method, extraOptions = {}, extraHeaders = {}) {
     let ticket = null;
     try {
-        return await requestJson(url);
+        return await requestJson(url, method, extraOptions, extraHeaders);
     } catch (e) {
         if (e.status !== 401 || !(WWW_AUTH_HEADER in e.headers)) {
             throw e;
@@ -87,16 +87,29 @@ export async function getProtectedJson(url, userToken) {
     const discovery = await getJson(process.env.REACT_APP_UMA_DISCOVERY_DOCUMENT_PATH);
     const rpt = await postForm(discovery.token_endpoint, tokenBody, userToken);
     const resourceHeaders = {
+        ... extraHeaders,
         "Authorization": `Bearer ${rpt.access_token}`
     }
 
-    return await requestJson(url, "GET", {}, resourceHeaders);
+    return await requestJson(url, method, extraOptions, resourceHeaders);
 }
 
+export async function getProtectedJson(url, userToken) {
+    return await protectedRequest(url, userToken, "GET");
+}
 
+export async function postProtectedJson(url, userToken, body) {
+    const options = {
+        body: JSON.stringify(body)
+    };
+    const headers = {
+        "Content-Type": 'application/json'
+    };
+
+    return await protectedRequest(url, userToken, "POST", options, headers);
+}
 
 export async function catchHttpErrors(body) {
-
     try {
         await body();
     } catch (e) {
