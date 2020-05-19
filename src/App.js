@@ -30,7 +30,6 @@ export default class App extends React.Component {
     if (tokens.token !== undefined) {
       this.setState(state => ({ token: tokens.token }));
     }
-    console.log(tokens);
   }
 
   isLoggedIn() {
@@ -72,11 +71,8 @@ export default class App extends React.Component {
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
                   <span class="nav-link">
-                    ADC Base: {process.env.REACT_APP_ADC_BASE_PATH}
+                    ADC URL: {process.env.REACT_APP_MIDDLEWARE_URL + process.env.REACT_APP_ADC_BASE_PATH}
                   </span>
                 </li>
               </ul>
@@ -90,7 +86,8 @@ export default class App extends React.Component {
           {/* BODY */}
           <div class="container mt-5">
             <PublicEndpoint url="/info"/>
-            <GetEndpoint url="/repertoire" token={this.state.token}/>
+            <GetEndpoint url="/repertoire" token={this.state.token} responseField="Repertoire"/>
+            <GetEndpoint url="/rearrangement" token={this.state.token} responseField="Rearrangement"/>
           </div>
 
           <ToastContainer

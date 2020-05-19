@@ -90,8 +90,6 @@ export async function getProtectedJson(url, userToken) {
         "Authorization": `Bearer ${rpt.access_token}`
     }
 
-    console.log(rpt);
-
     return await requestJson(url, "GET", {}, resourceHeaders);
 }
 
