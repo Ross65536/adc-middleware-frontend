@@ -7,7 +7,7 @@
 1. Install deps
 
 ```bash
-yarn i
+yarn install
 ```
 
 2. Setup keycloak

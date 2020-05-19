@@ -12,7 +12,6 @@ export default class GetEndpoint extends React.Component {
             response: "",
         };
 
-        this.handleChange = this.handleChange.bind(this);
         this.makeRequest = this.makeRequest.bind(this);
     }
 
@@ -22,10 +21,6 @@ export default class GetEndpoint extends React.Component {
             const json = await getProtectedJson(url, this.props.token);
             this.setState({ ...this.state, response: json });
         });
-    }
-
-    handleChange(event) {    
-        this.setState({...this.state, id: event.target.value});  
     }
 
     render() {
@@ -38,7 +33,7 @@ export default class GetEndpoint extends React.Component {
                 method="GET"
                 requestDisabled={this.props.token === ""}
             >
-                <input type="text" class="form-control" placeholder="resource id" value={this.state.id} onChange={this.handleChange}/>
+                <input type="text" class="form-control" placeholder="resource id" value={this.state.id} onChange={(event) => this.setState({...this.state, id: event.target.value})}/>
             </Endpoint>
         );
     }

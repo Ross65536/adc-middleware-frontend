@@ -84,17 +84,13 @@ export default class App extends React.Component {
 
             {this.loginMsg()}
             <button class="btn btn-primary ml-2" onClick={() => keycloak.login()}>Login</button>
-            {/* <button class="btn btn-primary ml-2" onClick={() => keycloak.logout()} disabled={!this.isLoggedIn()}>Logout</button> */}
+            <button class="btn btn-primary ml-2" onClick={() => this.setState({ ...this.state, token: "" })} disabled={!this.isLoggedIn()}>Logout</button>
           </nav>
     
           {/* BODY */}
           <div class="container mt-5">
             <PublicEndpoint url="/info"/>
             <GetEndpoint url="/repertoire" token={this.state.token}/>
-          </div>
-
-          <div>
-            TOKEN: {this.state.token}
           </div>
 
           <ToastContainer
