@@ -110,15 +110,18 @@ export default class PostEndpoint extends React.Component {
                         {
                             this.state.searchType ?
                                 (
-                                    this.props.publicFields.length !== 0 && <div class="form-check">
-                                        <input name="isPublic" class="form-check-input" type="checkbox" value="" id="publicFields"
-                                            checked={this.state.isPublic}
-                                            onChange={e => this.setState({ ...this.state, isPublic: e.target.checked })}
-                                        />
-                                        <label class="form-check-label" for="publicFields">
-                                            Public Fields?
-                                        </label>
-                                    </div>
+                                    this.props.publicFields.length !== 0 && 
+                                        <div class="form-check">
+                                            <input name="isPublic" class="form-check-input" type="checkbox" value="" id="publicFields"
+                                                checked={this.state.isPublic}
+                                                onChange={e => this.setState({ ...this.state, isPublic: e.target.checked })}
+                                            />
+                                            <label class="form-check-label" for="publicFields">
+                                                Public Fields?
+                                            </label>
+                                        </div>
+
+                                    
                                 ) :
                                 (
                                     <div class="form-group d-flex">
