@@ -119,11 +119,8 @@ export default class PostEndpoint extends React.Component {
                                             <label class="form-check-label" for="publicFields">
                                                 Public Fields?
                                             </label>
-                                        </div>
-
-                                    
-                                ) :
-                                (
+                                        </div>                                    
+                                ) : (
                                     <div class="form-group d-flex">
                                         <label for="facetsInput">Facets: </label>
                                         <select class="form-control ml-1" style={{width: '15rem'}} id="facetsInput" onChange={e => this.setState({ ...this.state, facet: e.target.value })}>
