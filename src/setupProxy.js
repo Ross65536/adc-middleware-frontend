@@ -5,7 +5,6 @@ module.exports = function(app) {
     '/airr/v1/',
     createProxyMiddleware({
       target: process.env.REACT_APP_MIDDLEWARE_URL,
-      changeOrigin: true,
     })
   );
 
@@ -13,7 +12,6 @@ module.exports = function(app) {
     '/auth',
     createProxyMiddleware({
       target: process.env.REACT_APP_KEYCLOAK_URL,
-      changeOrigin: true,
     })
   );
 

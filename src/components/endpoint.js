@@ -8,6 +8,7 @@ export default class Endpoint extends React.Component {
         super(props);
 
         this.response = this.response.bind(this);
+        this.name = this.name.bind(this);
     }
 
     response() {
@@ -20,7 +21,13 @@ export default class Endpoint extends React.Component {
         }
     }
 
-    
+    name() {
+        if (this.props.name === undefined) {
+            return this.props.url;
+        }
+
+        return this.props.name;
+    }
 
     render() {
         return (
@@ -28,7 +35,7 @@ export default class Endpoint extends React.Component {
                 <div class="bg-secondary text-white px-3 py-2"> 
                     <div class=" d-flex justify-content-between">
                         <span style={{fontSize:30}}>
-                            {this.props.method} <b>{this.props.url}</b>
+                            {this.props.method} <b>{this.name()}</b>
                         </span>
                         <button class="btn btn-primary" onClick={this.props.request}>Request</button>
                     </div>

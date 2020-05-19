@@ -30,7 +30,7 @@ export default class GetEndpoint extends React.Component {
 
     render() {
         return (
-            <Endpoint url={this.props.url} request={this.makeRequest} json={this.state.response} method="GET" >
+            <Endpoint url={this.props.url} name={`${this.props.url}/{repertorie_id}`} request={this.makeRequest} json={this.state.response} method="GET" >
                 <input type="text" class="form-control" placeholder="resource id" value={this.state.id} onChange={this.handleChange}/>
             </Endpoint>
         );

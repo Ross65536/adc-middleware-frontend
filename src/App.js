@@ -22,6 +22,7 @@ export default class App extends React.Component {
     }
 
     this.saveTokens = this.saveTokens.bind(this);
+    this.isLoggedIn = this.isLoggedIn.bind(this);
   }
 
   saveTokens(tokens) {
@@ -31,9 +32,21 @@ export default class App extends React.Component {
     console.log(tokens);
   }
 
+  isLoggedIn() {
+    if (this.state.token === "") {
+      return (<span>
+        NOT logged in
+      </span>);
+    }
+
+    return (
+      <span>
+        Logged In
+      </span>
+    );
+  }
+
   render() {
-    // const { keycloak, initialized } = useKeycloak();
-    
     return (
       <KeycloakProvider 
         onTokens={this.saveTokens} keycloak={keycloak}
@@ -60,8 +73,8 @@ export default class App extends React.Component {
               </ul>
             </div>
 
-
-            <button class="btn btn-primary" onClick={() => keycloak.login()}>Login</button>
+            {this.isLoggedIn()}
+            <button class="btn btn-primary ml-2" onClick={() => keycloak.login()}>Login</button>
           </nav>
     
           {/* BODY */}
