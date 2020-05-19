@@ -109,11 +109,30 @@ export async function postProtectedJson(url, userToken, body) {
     return await protectedRequest(url, userToken, "POST", options, headers);
 }
 
+function parseJson(string) {
+    try {
+        return JSON.parse(string);
+    } catch (e) {
+        return null;
+    }
+}
+
 export async function catchHttpErrors(body) {
     try {
-        await body();
+        return await body();
     } catch (e) {
+        if (!('status' in e && 'body' in e)) 
+            throw e;
+
         const msg = `Error ${e.method} ${e.url} status: ${e.status} body: ${e.body}`;
+        
+        const json = parseJson(e.body);
+        if (e.status === 403 && json !== null && 'error_description' in json && json['error_description'] === 'request_submitted') {
+            console.log(msg);
+            toast.info("Request to access resource submitted");
+            return;
+        }
+        
         console.error(msg);
         toast.error(`Error making request (${e.status})`);
     }

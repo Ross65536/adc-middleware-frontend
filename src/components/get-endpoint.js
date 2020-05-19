@@ -16,6 +16,8 @@ export default class GetEndpoint extends React.Component {
     }
 
     async makeRequest() {
+        this.setState({...this.state, response: ""});
+        
         const url = `${process.env.REACT_APP_ADC_BASE_PATH}${this.props.url}/${this.state.id}`;
         catchHttpErrors(async () => {
             let json = await getProtectedJson(url, this.props.token);

@@ -15,6 +15,8 @@ export default class PublicEndpoint extends React.Component {
     }
 
     async makeRequest() {
+        this.setState({...this.state, response: ""});
+        
         const url = `${process.env.REACT_APP_ADC_BASE_PATH}${this.props.url}`;
         catchHttpErrors(async () => {
             const json = await getJson(url);

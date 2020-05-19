@@ -22,7 +22,8 @@ export default class App extends React.Component {
 
     this.state = {
       token: "",
-      publicFields: {}
+      repertoirePublic: [],
+      rearrangementPublic: []
     }
 
     this.saveTokens = this.saveTokens.bind(this);
@@ -31,8 +32,19 @@ export default class App extends React.Component {
   }
 
   async componentDidMount() {  
-    const json = await catchHttpErrors(() => getJson("/airr/v1/public_fields"));
-    this.setState({... this.state, publicFields: json});
+    const json = await catchHttpErrors(async () => await getJson("/airr/v1/public_fields"));
+    
+    const fields = {
+      "Repertoire": [],
+      "Rearrangement": [],
+      ... json
+    };
+
+    this.setState({... this.state, repertoirePublic: fields['Repertoire'], rearrangementPublic: fields['Rearrangement']});
+  }
+
+  repertoriePublic() {
+    return this.state.publicFields['Repertoire'];
   }
 
   saveTokens(tokens) {
@@ -102,12 +114,12 @@ export default class App extends React.Component {
             <GetEndpoint url="/repertoire" token={this.state.token} responseField="Repertoire"/>
             <GetEndpoint url="/rearrangement" token={this.state.token} responseField="Rearrangement"/>
 
-            <PostEndpoint url="/repertoire" token={this.state.token} responseField="Repertoire"/>
+            <PostEndpoint url="/repertoire" token={this.state.token} responseField="Repertoire" publicFields={this.state.repertoirePublic}/>
           </div>
 
           <ToastContainer
             position="bottom-right"
-            autoClose={5000}
+            autoClose={3000}
             hideProgressBar={true}
             newestOnTop={false}
             closeOnClick
