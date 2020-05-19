@@ -25,12 +25,14 @@ export default class App extends React.Component {
       publicFields: {}
     }
 
-    catchHttpErrors(() => getJson("/airr/v1/public_fields"))
-      .then(json => this.setState({... this.state, publicFields: json}));
-
     this.saveTokens = this.saveTokens.bind(this);
     this.isLoggedIn = this.isLoggedIn.bind(this);
     this.loginMsg = this.loginMsg.bind(this);
+  }
+
+  async componentDidMount() {  
+    const json = await catchHttpErrors(() => getJson("/airr/v1/public_fields"));
+    this.setState({... this.state, publicFields: json});
   }
 
   saveTokens(tokens) {
@@ -86,8 +88,11 @@ export default class App extends React.Component {
             </div>
 
             {this.loginMsg()}
-            <button class="btn btn-primary ml-2" onClick={() => keycloak.login()}>Login</button>
-            <button class="btn btn-primary ml-2" onClick={() => this.setState({ ...this.state, token: "" })} disabled={!this.isLoggedIn()}>Logout</button>
+            {
+              this.isLoggedIn() ? 
+                (<button class="btn btn-primary ml-2" onClick={() => this.setState({ ...this.state, token: "" })}> Logout </button>) :
+                (<button class="btn btn-primary ml-2" onClick={() => keycloak.login()}> Login </button>)
+            }
           </nav>
     
           {/* BODY */}
