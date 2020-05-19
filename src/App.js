@@ -23,6 +23,7 @@ export default class App extends React.Component {
 
     this.saveTokens = this.saveTokens.bind(this);
     this.isLoggedIn = this.isLoggedIn.bind(this);
+    this.loginMsg = this.loginMsg.bind(this);
   }
 
   saveTokens(tokens) {
@@ -33,14 +34,22 @@ export default class App extends React.Component {
   }
 
   isLoggedIn() {
-    if (this.state.token === "") {
-      return (<span>
+    return this.state.token !== "";
+  }
+
+  loginMsg() {
+    if (! this.isLoggedIn()) {
+      return (
+      <span>
+        <i class="fas fa-circle mr-1" style={{color: 'red'}}></i>
         NOT logged in
-      </span>);
+      </span>
+      );
     }
 
     return (
       <span>
+        <i class="fas fa-circle mr-1" style={{color: 'green'}}></i>
         Logged In
       </span>
     );
@@ -73,19 +82,19 @@ export default class App extends React.Component {
               </ul>
             </div>
 
-            {this.isLoggedIn()}
+            {this.loginMsg()}
             <button class="btn btn-primary ml-2" onClick={() => keycloak.login()}>Login</button>
+            {/* <button class="btn btn-primary ml-2" onClick={() => keycloak.logout()} disabled={!this.isLoggedIn()}>Logout</button> */}
           </nav>
     
           {/* BODY */}
           <div class="container mt-5">
             <PublicEndpoint url="/info"/>
             <GetEndpoint url="/repertoire" token={this.state.token}/>
-
-
           </div>
-          <div class="mt-5">
-            Token: {this.state.token}
+
+          <div>
+            TOKEN: {this.state.token}
           </div>
 
           <ToastContainer

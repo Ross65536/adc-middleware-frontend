@@ -37,7 +37,7 @@ export default class Endpoint extends React.Component {
                         <span style={{fontSize:30}}>
                             {this.props.method} <b>{this.name()}</b>
                         </span>
-                        <button class="btn btn-primary" onClick={this.props.request}>Request</button>
+                        <button class="btn btn-primary" onClick={this.props.request} disabled={this.props.requestDisabled}>Request</button>
                     </div>
 
                     <div class="mt-2">
