@@ -19,7 +19,7 @@ Start keycloak and then create a new client in the `Clients` tab: load (import) 
 
 3. Disable CORS in browser
 
-For firefox you can [use](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/)
+For firefox you can use [this extension](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/)
 
 ### Development
 
