@@ -8,11 +8,4 @@ module.exports = function(app) {
     })
   );
 
-  app.use(
-    '/auth',
-    createProxyMiddleware({
-      target: process.env.REACT_APP_KEYCLOAK_URL,
-    })
-  );
-
 };
