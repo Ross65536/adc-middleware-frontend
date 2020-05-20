@@ -41,8 +41,11 @@ export default class Endpoint extends React.Component {
                 <div class="bg-secondary text-white px-3 py-2"> 
                     <div class=" d-flex justify-content-between">
                         <span style={{fontSize:30}}>
-                            {this.props.method} <b>{this.name()}</b>
+                            <b>{this.props.title}</b>
                         </span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>{this.props.method} <b>{this.name()}</b></span>
                         <button class="btn btn-primary" onClick={this.props.request} disabled={this.props.requestDisabled}>Request</button>
                     </div>
 

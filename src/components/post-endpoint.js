@@ -89,6 +89,7 @@ export default class PostEndpoint extends React.Component {
                 method="POST"
                 requestDisabled={this.props.token === ""}
                 isLoading={this.state.loading}
+                title={this.props.title}
             >
                 <div class="w-100">
 

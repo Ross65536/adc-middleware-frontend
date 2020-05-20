@@ -66,7 +66,6 @@ export default class App extends React.Component {
       return (
       <span>
         <i class="fas fa-circle mr-1" style={{color: 'red'}}></i>
-        NOT logged in
       </span>
       );
     }
@@ -74,7 +73,6 @@ export default class App extends React.Component {
     return (
       <span>
         <i class="fas fa-circle mr-1" style={{color: 'green'}}></i>
-        Logged In
       </span>
     );
   }
@@ -96,13 +94,6 @@ export default class App extends React.Component {
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <span class="nav-link">
-                    ADC URL: {process.env.REACT_APP_MIDDLEWARE_URL + process.env.REACT_APP_ADC_BASE_PATH}
-                  </span>
-                </li>
-              </ul>
             </div>
 
             {this.loginMsg()}
@@ -115,10 +106,10 @@ export default class App extends React.Component {
     
           {/* BODY */}
           <div class="container mt-5">
-            <PublicEndpoint url="/info"/>
+            <PublicEndpoint url="/info" title="Public (unprotected) endpoint"/>
 
-            <GetEndpoint url="/repertoire" token={this.state.token} responseField="Repertoire"/>
-            <GetEndpoint url="/rearrangement" token={this.state.token} responseField="Rearrangement"/>
+            <GetEndpoint url="/repertoire" token={this.state.token} responseField="Repertoire" title="Request single repertoire"/>
+            <GetEndpoint url="/rearrangement" token={this.state.token} responseField="Rearrangement" title="Request single rearrangement"/>
 
             <PostEndpoint 
               url="/repertoire" 
@@ -126,6 +117,7 @@ export default class App extends React.Component {
               responseField="Repertoire" 
               publicFields={this.state.repertoirePublic}
               fields={REPERTOIRE_FIELDS}
+              title="Search repertoires"
             />
             <PostEndpoint 
               url="/rearrangement" 
@@ -133,6 +125,7 @@ export default class App extends React.Component {
               responseField="Rearrangement" 
               publicFields={this.state.rearrangementPublic}
               fields={REARRANGEMENT_FIELDS}
+              title="Search rearrangements"
             />
           </div>
 

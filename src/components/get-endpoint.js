@@ -40,6 +40,7 @@ export default class GetEndpoint extends React.Component {
                 json={this.state.response} 
                 method="GET"
                 requestDisabled={this.props.token === "" || this.state.id === ""}
+                title={this.props.title}
             >
                 <input type="text" class="form-control" placeholder="resource id" value={this.state.id} onChange={(event) => this.setState({...this.state, id: event.target.value})}/>
             </Endpoint>

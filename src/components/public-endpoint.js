@@ -26,7 +26,7 @@ export default class PublicEndpoint extends React.Component {
 
     render() {
         return (
-            <Endpoint url={this.props.url} request={this.makeRequest} json={this.state.response} method="GET" />
+            <Endpoint url={this.props.url} request={this.makeRequest} json={this.state.response} method="GET" title={this.props.title} />
         );
     }
 }
