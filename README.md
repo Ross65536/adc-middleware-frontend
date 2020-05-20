@@ -17,6 +17,10 @@ Start keycloak and then create a new client in the `Clients` tab: load (import) 
 
 > If you run the middleware server or keycloak server in unexpected ports you need to update `.env`
 
+3. Disable CORS in browser
+
+For firefox you can [use](https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/)
+
 ### Development
 
 - Run locally:
