@@ -87,7 +87,7 @@ export default class PostEndpoint extends React.Component {
                 request={this.makeRequest}
                 json={this.state.response}
                 method="POST"
-                requestDisabled={this.props.token === ""}
+                requestDisabled={!this.state.isPublic && this.props.token === ""}
                 isLoading={this.state.loading}
                 title={this.props.title}
             >
