@@ -125,7 +125,7 @@ export default class PostEndpoint extends React.Component {
                                         </div>                                    
                                 ) : (
                                     <div class="form-group d-flex">
-                                        <label for="facetsInput">Facets: </label>
+                                        <label for="facetsInput" class="justify-content-center align-self-center">Facets: </label>
                                         <select class="form-control ml-1" style={{width: '15rem'}} id="facetsInput" onChange={e => this.setState({ ...this.state, facet: e.target.value })}>
                                             <option value="">--</option>
                                             {this.facetsOptions()}
@@ -135,7 +135,7 @@ export default class PostEndpoint extends React.Component {
                         }
 
                         <div class="form-group d-flex">
-                            <label for="limitInput">Size: </label>
+                            <label for="limitInput" class="justify-content-center align-self-center">Size: </label>
                             <input type="number" class="form-control ml-2" id="limitInput" min="0"
                                 style={{width: '5rem'}}
                                 value={this.state.limit}
@@ -144,7 +144,7 @@ export default class PostEndpoint extends React.Component {
                         </div>
 
                         <div class="form-group d-flex">
-                            <label for="fromInput">From: </label>
+                            <label for="fromInput" class="justify-content-center align-self-center">From: </label>
                             <input type="number" class="form-control ml-2" id="fromInput" min="0"
                                 style={{width: '5rem'}}
                                 value={this.state.from}
