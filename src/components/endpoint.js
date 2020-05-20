@@ -1,6 +1,7 @@
 import React from 'react';
 
 import JSONTree from 'react-json-tree';
+import LoadingOverlay from 'react-loading-overlay';
 
 export default class Endpoint extends React.Component {
 
@@ -32,6 +33,11 @@ export default class Endpoint extends React.Component {
     render() {
         return (
             <div class="mb-3">
+                <LoadingOverlay
+                    active={this.props.isLoading}
+                    spinner
+                    text='Making the request...'
+                >
                 <div class="bg-secondary text-white px-3 py-2"> 
                     <div class=" d-flex justify-content-between">
                         <span style={{fontSize:30}}>
@@ -44,9 +50,10 @@ export default class Endpoint extends React.Component {
                         {this.props.children}
                     </div>
                     <div>
-                        {this.response()}
+                            {this.response()}
                     </div>
                 </div>
+                </LoadingOverlay>
             </div>
         );
     }

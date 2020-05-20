@@ -16,6 +16,7 @@ export default class PostEndpoint extends React.Component {
             searchType: true,
             facet: "",
             showRequest: false,
+            loading: false,
         };
 
         this.makeRequest = this.makeRequest.bind(this);
@@ -49,7 +50,7 @@ export default class PostEndpoint extends React.Component {
     }
 
     async makeRequest() {
-        this.setState({ ...this.state, response: "" });
+        this.setState({ ...this.state, response: "", loading: true });
 
         const url = `${process.env.REACT_APP_ADC_BASE_PATH}${this.props.url}`;
         const request = this.buildRequest();
@@ -60,7 +61,7 @@ export default class PostEndpoint extends React.Component {
             } else if ("Facet" in json) {
                 json = json["Facet"];
             }
-            this.setState({ ...this.state, response: json });
+            this.setState({ ...this.state, response: json, loading: false });
         });
     }
 
@@ -87,6 +88,7 @@ export default class PostEndpoint extends React.Component {
                 json={this.state.response}
                 method="POST"
                 requestDisabled={this.props.token === ""}
+                isLoading={this.state.loading}
             >
                 <div class="w-100">
 
