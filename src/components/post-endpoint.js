@@ -139,15 +139,18 @@ export default class PostEndpoint extends React.Component {
                                 )
                         }
 
-                        <div class="form-group d-flex ml-3">
-                            <label for="facetsInput" class="justify-content-center align-self-center">Include Fields: </label>
-                            <select class="form-control ml-1" style={{width: '5rem'}} id="facetsInput" onChange={e => this.setState({ ...this.state, include_fields: e.target.value })}>
-                                <option value="">--</option>
-                                <option>miairr</option>
-                                <option>airr-core</option>
-                                <option>airr-schema</option>
-                            </select>
-                        </div>
+                        {
+                            this.state.searchType &&
+                            <div class="form-group d-flex ml-3">
+                                <label for="facetsInput" class="justify-content-center align-self-center">Include Fields: </label>
+                                <select class="form-control ml-1" style={{width: '5rem'}} id="facetsInput" onChange={e => this.setState({ ...this.state, include_fields: e.target.value })}>
+                                    <option value="">--</option>
+                                    <option>miairr</option>
+                                    <option>airr-core</option>
+                                    <option>airr-schema</option>
+                                </select>
+                            </div>
+                        }
 
                         <div class="form-group d-flex">
                             <label for="limitInput" class="justify-content-center align-self-center">Size: </label>
