@@ -15,6 +15,7 @@ export default class PostEndpoint extends React.Component {
             from: "",
             searchType: true,
             facet: "",
+            include_fields: "",
             showRequest: false,
             loading: false,
         };
@@ -34,6 +35,10 @@ export default class PostEndpoint extends React.Component {
 
         if (!this.state.searchType && this.state.facet !== "") {
             ret.facets = this.state.facet
+        }
+
+        if (this.state.searchType && this.state.include_fields !== "") {
+            ret.include_fields = this.state.include_fields
         }
 
         if (this.state.limit !== "") {
@@ -114,15 +119,15 @@ export default class PostEndpoint extends React.Component {
                             this.state.searchType ?
                                 (
                                     this.props.publicFields.length !== 0 && 
-                                        <div class="form-check">
-                                            <input name="isPublic" class="form-check-input" type="checkbox" value="" id="publicFields"
-                                                checked={this.state.isPublic}
-                                                onChange={e => this.setState({ ...this.state, isPublic: e.target.checked })}
-                                            />
-                                            <label class="form-check-label" for="publicFields">
-                                                Public Fields?
-                                            </label>
-                                        </div>                                    
+                                    <div class="form-check">
+                                        <input name="isPublic" class="form-check-input" type="checkbox" value="" id="publicFields"
+                                            checked={this.state.isPublic}
+                                            onChange={e => this.setState({ ...this.state, isPublic: e.target.checked })}
+                                        />
+                                        <label class="form-check-label" for="publicFields">
+                                            Public Fields?
+                                        </label>
+                                    </div>                           
                                 ) : (
                                     <div class="form-group d-flex">
                                         <label for="facetsInput" class="justify-content-center align-self-center">Facets: </label>
@@ -133,6 +138,16 @@ export default class PostEndpoint extends React.Component {
                                     </div>
                                 )
                         }
+
+                        <div class="form-group d-flex ml-3">
+                            <label for="facetsInput" class="justify-content-center align-self-center">Include Fields: </label>
+                            <select class="form-control ml-1" style={{width: '5rem'}} id="facetsInput" onChange={e => this.setState({ ...this.state, include_fields: e.target.value })}>
+                                <option value="">--</option>
+                                <option>miairr</option>
+                                <option>airr-core</option>
+                                <option>airr-schema</option>
+                            </select>
+                        </div>
 
                         <div class="form-group d-flex">
                             <label for="limitInput" class="justify-content-center align-self-center">Size: </label>
