@@ -24,6 +24,8 @@ export default class PostEndpoint extends React.Component {
         this.buildRequest = this.buildRequest.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.facetsOptions = this.facetsOptions.bind(this);
+        this.requestDisabled = this.requestDisabled.bind(this);
+        
     }
 
     buildRequest() {
@@ -84,6 +86,12 @@ export default class PostEndpoint extends React.Component {
         return ret;
     }
 
+    requestDisabled() {
+        const isPublicFacets = this.state.facet !== "" && this.props.publicFields.includes(this.state.facet); 
+        const isPublicSeach = this.state.isPublic && this.state.include_fields === "";
+        return !isPublicSeach && !isPublicFacets && this.props.token === "";
+    }
+
     render() {
         return (
             <Endpoint
@@ -92,7 +100,7 @@ export default class PostEndpoint extends React.Component {
                 request={this.makeRequest}
                 json={this.state.response}
                 method="POST"
-                requestDisabled={!this.state.isPublic && this.props.token === ""}
+                requestDisabled={this.requestDisabled()}
                 isLoading={this.state.loading}
                 title={this.props.title}
             >
