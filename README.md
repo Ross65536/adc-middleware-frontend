@@ -1,6 +1,6 @@
 # Frontend for ADC middleware server
 
-A very simple and basic frontend for the [ADC middleware server](https://github.com/Ross65536/adc-middleware).
+A very simple and basic frontend for the [ADC middleware server](https://github.com/Ross65536/adc-middleware), meant only for the demonstration of the middleware's access control capabilities.
 
 ## Instructions
 
