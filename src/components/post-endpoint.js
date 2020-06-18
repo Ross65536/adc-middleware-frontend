@@ -61,7 +61,8 @@ export default class PostEndpoint extends React.Component {
 
         const url = `${process.env.REACT_APP_ADC_BASE_PATH}${this.props.url}`;
         const request = this.buildRequest();
-        catchHttpErrors(async () => {
+        
+        await catchHttpErrors(async () => {
             let json = await postProtectedJson(url, this.props.token, request);
             if (this.props.responseField in json) {
                 json = json[this.props.responseField];
@@ -70,6 +71,8 @@ export default class PostEndpoint extends React.Component {
             }
             this.setState({ ...this.state, response: json, loading: false });
         });
+
+        this.setState({ ...this.state, loading: false });
     }
 
     handleChange(val) {
