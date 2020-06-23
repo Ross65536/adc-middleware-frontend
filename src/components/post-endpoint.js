@@ -99,7 +99,7 @@ export default class PostEndpoint extends React.Component {
         return (
             <Endpoint
                 url={this.props.url}
-                name={this.props.url}
+                name={'/v1' + this.props.url}
                 request={this.makeRequest}
                 json={this.state.response}
                 method="POST"

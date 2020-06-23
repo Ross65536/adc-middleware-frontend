@@ -35,7 +35,7 @@ export default class GetEndpoint extends React.Component {
         return (
             <Endpoint 
                 url={this.props.url} 
-                name={`${this.props.url}/{id}`} 
+                name={`/v1${this.props.url}/{id}`} 
                 request={this.makeRequest} 
                 json={this.state.response} 
                 method="GET"

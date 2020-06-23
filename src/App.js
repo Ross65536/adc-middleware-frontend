@@ -106,7 +106,8 @@ export default class App extends React.Component {
     
           {/* BODY */}
           <div class="container mt-5">
-            <PublicEndpoint url="/info" title="(Unprotected) public endpoint"/>
+            <PublicEndpoint url="/" title="(Unprotected) Status"/>
+            <PublicEndpoint url="/info" title="(Unprotected) Server Information"/>
 
             <GetEndpoint url="/repertoire" token={this.state.token} responseField="Repertoire" title="Request single repertoire"/>
             <GetEndpoint url="/rearrangement" token={this.state.token} responseField="Rearrangement" title="Request single rearrangement"/>
