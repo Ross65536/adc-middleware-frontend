@@ -106,6 +106,7 @@ export default class App extends React.Component {
           </nav>
     
           {/* BODY */}
+          <h1 class="mt-5">Researcher</h1>
           <div class="container mt-5">
             <PublicEndpoint url="/" title="(Unprotected) Status"/>
             <PublicEndpoint url="/info" title="(Unprotected) Server Information"/>
@@ -121,6 +122,7 @@ export default class App extends React.Component {
               fields={REPERTOIRE_FIELDS}
               title="Search repertoires"
             />
+            
             <PostEndpoint 
               url="/rearrangement" 
               token={this.state.token} 
@@ -129,7 +131,10 @@ export default class App extends React.Component {
               fields={REARRANGEMENT_FIELDS}
               title="Search rearrangements"
             />
+          </div>
 
+          <h1 class="mt-5">Administrator</h1>
+          <div class="container mt-5">
             <SynchronizeEndpoint />
           </div>
 
