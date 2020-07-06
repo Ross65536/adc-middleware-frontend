@@ -37,6 +37,13 @@ export async function getJson(url) {
     return await requestJson(url);
 }
 
+export async function postJson(url, bearerToken) {
+    const headers = {
+        "Authorization": `Bearer ${bearerToken}`
+    }
+    return await requestJson(url, "POST", {}, headers);
+}
+
 function urlEncode(obj) {
     var str = [];
     for (var p in obj)
@@ -117,7 +124,7 @@ function parseJson(string) {
     }
 }
 
-export async function catchHttpErrors(body) {
+export async function catchHttpErrors(body, errorMsg = null) {
     try {
         return await body();
     } catch (e) {
@@ -134,6 +141,10 @@ export async function catchHttpErrors(body) {
         }
         
         console.error(msg);
-        toast.error(`Error making request (${e.status})`);
+
+        if (errorMsg == null) {
+            errorMsg = `Error making request (${e.status})`;
+        }
+        toast.error(errorMsg);
     }
 }
